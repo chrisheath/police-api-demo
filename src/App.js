@@ -1,4 +1,4 @@
-import DataTable from './components/DataTable';
+import Results from './components/Results';
 import LocationSelector from './components/LocationSelector';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -13,7 +13,7 @@ function App() {
       <Row>
         <Col>
           <LocationSelector />
-          <DataTable />
+          <Results />
         </Col>
       </Row>
     </Container>
