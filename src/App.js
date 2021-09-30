@@ -1,6 +1,8 @@
 import Results from './components/Results';
 import LocationSelector from './components/LocationSelector';
+import DatePicker from './components/datePicker';
 import { Container, Row, Col } from 'react-bootstrap';
+import LoadCrimes from './components/loadCrimes';
 
 function App() {
   return (
@@ -13,6 +15,18 @@ function App() {
       <Row>
         <Col>
           <LocationSelector />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <DatePicker />
+        </Col>
+        <Col>
+          <LoadCrimes />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <Results />
         </Col>
       </Row>

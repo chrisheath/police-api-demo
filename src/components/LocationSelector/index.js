@@ -1,32 +1,40 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
-import { getCrime } from '../../store';
-
-function LocationSelector() {  
-  const currentLocation = useSelector(state => state.currentLocation);
-  const locations = useSelector(state => state.locations);
+function LocationSelector({ currentLocation, locations }) {  
   const dispatch = useDispatch();
-  
+    
   function onChange(e) {
-    dispatch({ type: 'UPDATE_LOCATION', payload: e.target.value });
+    const newVal = e.target.value;
+    dispatch({ type: 'UPDATE_LOCATION', payload: [] });
 
-    const lat = locations[e.target.value].lat;
-    const long = locations[e.target.value].long;
+    if (!newVal || newVal.length === 0) {
+      return;
+    }
 
-    dispatch(getCrime(lat, long));
+    dispatch({ type: 'UPDATE_LOCATION', payload: newVal });
   }
 
   return (
-    <div class="location-selector">
+    <div className="location-selector">
       <Form.Control as="select" size="lg" onChange={onChange}>
-        <option>Select Location</option>
+        <option value="">Select Location</option>
         {locations.map(item => {
           return <option value={item.id} key={item.id}>{item.name}</option>
         })}
       </Form.Control>
+      {!currentLocation ? (
+        <p>Please select a location above.</p>
+      ) : (
+        <p></p>
+      )}
     </div>
   );
 };
 
-export default LocationSelector;
+const mapStateToProps = state => ({
+  currentLocation: state.currentLocation,
+  locations: state.locations,
+});
+
+export default connect(mapStateToProps)(LocationSelector);
